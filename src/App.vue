@@ -1,33 +1,22 @@
-<script>
+<script setup>
 import axios from 'axios';
 import navbar from './components/navbar.vue';
 import cards from './components/cards.vue';
+import { ref, onMounted } from 'vue';
 
-export default {
-  components: {
-    navbar,
-    cards,
-  },
-  data() {
-    return {
-      products: [],
-    };
-  },
-  mounted() {
-    this.fetchData();
-  },
-  methods: {
-    fetchData() {
-      axios.get('https://fakestoreapi.com/products')
-        .then(res => {
-          this.products = res.data;
-        })
-        .catch(error => {
-          console.error("There was an error fetching the data:", error);
-        });
-    },
-  },
-};
+const products = ref([]);
+
+function fetchData() {
+  axios.get('https://fakestoreapi.com/products')
+    .then(res => {
+      products.value = res.data;
+    })
+    .catch(error => {
+      console.error("There was an error fetching the data:", error);
+    });
+}
+
+onMounted(() => fetchData());
 </script>
 
 <template>
