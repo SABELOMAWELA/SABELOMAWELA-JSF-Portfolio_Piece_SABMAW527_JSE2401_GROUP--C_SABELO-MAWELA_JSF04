@@ -3,7 +3,7 @@ import axios from 'axios';
 import navbar from './components/navbar.vue';
 import cards from './components/cards.vue';
 import FilterSortComponent from './components/FilterSortComponent.vue';
-import { ref, onMounted} from 'vue';
+import { ref, onMounted } from 'vue';
 
 const products = ref([]);
 const filteredProducts = ref([]);
@@ -11,6 +11,7 @@ const categories = ref([]);
 const searchTerm = ref('');
 const selectedCategory = ref('');
 const sorting = ref('');
+const loading = ref(true);
 
 function fetchData() {
   axios.get('https://fakestoreapi.com/products')
@@ -18,9 +19,11 @@ function fetchData() {
       products.value = res.data;
       filteredProducts.value = res.data;
       categories.value = [...new Set(res.data.map(product => product.category))];
+      loading.value = false; 
     })
     .catch(error => {
       console.error("There was an error fetching the data:", error);
+      loading.value = false;
     });
 }
 
@@ -73,6 +76,7 @@ function handleSort(order) {
       @search="handleSearch" 
       @sort="handleSort" 
     />
-    <cards :products="filteredProducts" />
+    <div v-if="loading">Loading...</div>
+    <cards v-else :products="filteredProducts" />
   </div>
 </template>
