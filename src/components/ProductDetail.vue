@@ -1,5 +1,6 @@
 
 <template>
+  <navbar />
     <div v-if="loading">Loading...</div>
     <div v-else class="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-6">
       <div class="flex justify-between items-center">
@@ -29,17 +30,21 @@
   </template>
   
   <script>
+  import navbar from '../components/navbar.vue';
   import { ref, onMounted } from 'vue';
   import axios from 'axios';
-  
+
   export default {
-    name: 'ProductDetail',
-    props: {
-      id: {
-        type: String,
-        required: true
-      }
-    },
+  name: 'ProductDetail',
+  components: {
+    navbar
+  },
+  props: {
+    id: {
+      type: String,
+      required: true
+    }
+  },
     setup(props) {
       const product = ref({});
       const loading = ref(true);

@@ -64,7 +64,7 @@ export default {
     };
 
     const addToFavourites = () => {
-      // Add to favourites logic
+    
     };
 
     return { handleClick, addToFavourites };
