@@ -2,7 +2,7 @@
   <div class="grid justify-center">
     <div class="lg:max-h-[130rem] max-w-xl mx-auto grid gap-4 grid-cols-1 lg:grid-cols-4 md:grid-cols-2 items-center lg:max-w-none my-4">
       <div v-for="product in products" :key="product.id"
-        @click="handleClick"
+        @click="handleClick(product.id)"
         class="flex flex-col max-h-[130rem] cursor-pointer max-w-80 hover:-translate-y-1 hover:scale-105 duration-300 bg-white border border-slate-200 shadow shadow-slate-950/5 rounded-2xl overflow-hidden">
         <img :src="product.image" class="object-contain h-48 mt-3" :alt="product.title" />
 
@@ -17,7 +17,7 @@
             </header>
             
             <div class="text-base line-clamp-2 font-extrabold text-slate-500 leading-snug">
-              <h2>{{ product.price }}</h2>
+              <h2>${{ product.price }}</h2>
             </div>
           </div>
 
@@ -28,7 +28,7 @@
               </span>
             </div>
             <div class="justify-end space-x-2">
-              <button @click="addToFavourites">
+              <button @click.stop="addToFavourites">
                 <svg class="me-1.5 h-5 w-5 hover:fill-red-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" transform="scale(1.6)">
                   <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
                 </svg>
@@ -46,6 +46,8 @@
 </template>
 
 <script>
+import { useRouter } from 'vue-router';
+
 export default {
   name: 'cards',
   props: {
@@ -54,9 +56,18 @@ export default {
       required: true
     }
   },
-  methods: {
-    handleClick() {},
-    addToFavourites() {}
+  setup() {
+    const router = useRouter();
+
+    const handleClick = (id) => {
+      router.push({ name: 'ProductDetail', params: { id } });
+    };
+
+    const addToFavourites = () => {
+      // Add to favourites logic
+    };
+
+    return { handleClick, addToFavourites };
   }
 };
 </script>
