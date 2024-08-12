@@ -99,13 +99,9 @@ export default {
       this.show = !this.show;
     },
     login() {
-      // Add your login logic here
+     
       console.log('Logging in with', this.username, this.password);
     },
   },
 };
 </script>
-
-<style scoped>
-/* Add your custom styles here */
-</style>
