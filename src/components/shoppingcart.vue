@@ -1,6 +1,7 @@
 <template>
-  <navbar />
-    <section class="bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
+  <div>
+    <navbar />
+    <section class="py-8 antialiased dark:bg-gray-900 md:py-16">
       <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
         <h2 class="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">Shopping Cart</h2>
   
@@ -97,72 +98,58 @@
                 <span class="text-sm font-normal text-gray-500 dark:text-gray-400"> or </span>
                 <a href="#" title="" class="inline-flex items-center gap-2 text-sm font-medium text-primary-700 underline hover:no-underline dark:text-primary-500">
                   Continue Shopping
-                  <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4" />
+                  <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 13 4.293-4.293a1 1 0 0 0 0-1.414L6 3" />
                   </svg>
                 </a>
               </div>
+            </div>
+  
+            <div class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:p-6">
+              <p class="text-base font-medium text-gray-500 dark:text-gray-400">Shipping to <span class="font-bold text-gray-900 dark:text-white">United States</span></p>
+              <p class="text-base font-medium text-gray-500 dark:text-gray-400">Arrives by <span class="font-bold text-gray-900 dark:text-white">Wednesday, Dec 25th</span></p>
             </div>
           </div>
         </div>
       </div>
     </section>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        products: [
-          {
-            imageLight: "https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg",
-            imageDark: "https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg",
-            alt: "imac image",
-            quantity: 2,
-            price: "$1,499",
-            name: "PC system All in One APPLE iMac (2023) mqrq3ro/a, Apple M3, 24\" Retina 4.5K, 8GB, SSD 256GB, 10-core GPU, Keyboard layout INT"
-          },
-          {
-            imageLight: "https://flowbite.s3.amazonaws.com/blocks/e-commerce/apple-watch-light.svg",
-            imageDark: "https://flowbite.s3.amazonaws.com/blocks/e-commerce/apple-watch-dark.svg",
-            alt: "apple watch image",
-            quantity: 1,
-            price: "$598",
-            name: "Restored Apple Watch Series 8 (GPS) 41mm Midnight Aluminum Case with Midnight Sport Band"
-          },
-          {
-            imageLight: "https://flowbite.s3.amazonaws.com/blocks/e-commerce/macbook-pro-light.svg",
-            imageDark: "https://flowbite.s3.amazonaws.com/blocks/e-commerce/macbook-pro-dark.svg",
-            alt: "macbook pro image",
-            quantity: 1,
-            price: "$1,799",
-            name: "Apple - MacBook Pro 16\" Laptop, M3 Pro chip, 36GB Memory, 18-core GPU, 512GB SSD, Space Black"
-          },
-          {
-            imageLight: "https://flowbite.s3.amazonaws.com/blocks/e-commerce/ipad-light.svg",
-            imageDark: "https://flowbite.s3.amazonaws.com/blocks/e-commerce/ipad-dark.svg",
-            alt: "ipad image",
-            quantity: 1,
-            price: "$699",
-            name: "Tablet APPLE iPad Pro 12.9\" 6th Gen, 128GB, Wi-Fi, Gold"
-          }
-        ]
-      };
+  </div>
+</template>
+
+<script>
+import navbar from '../components/navbar.vue';
+
+export default {
+  components: {
+    navbar
+  },
+  data() {
+    return {
+      products: [
+        {
+          name: 'Premium Apple iPhone 11 Pro Max',
+          imageLight: 'https://flowbite.s3.amazonaws.com/blocks/ecommerce-ui/iphone-light.png',
+          imageDark: 'https://flowbite.s3.amazonaws.com/blocks/ecommerce-ui/iphone-dark.png',
+          alt: 'Apple iPhone 11 Pro Max',
+          price: '$1,599.00',
+          quantity: 1,
+        },
+      ],
+    };
+  },
+  methods: {
+    increment(index) {
+      this.products[index].quantity++;
     },
-    methods: {
-      increment(index) {
-        this.products[index].quantity++;
-      },
-      decrement(index) {
-        if (this.products[index].quantity > 1) {
-          this.products[index].quantity--;
-        }
-      },
-      remove(index) {
-        this.products.splice(index, 1);
+    decrement(index) {
+      if (this.products[index].quantity > 0) {
+        this.products[index].quantity--;
       }
-    }
-  };
-  </script>
-  
- 
+    },
+    remove(index) {
+      this.products.splice(index, 1);
+    },
+  },
+};
+</script>
+

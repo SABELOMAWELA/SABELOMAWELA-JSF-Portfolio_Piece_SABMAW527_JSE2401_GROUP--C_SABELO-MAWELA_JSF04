@@ -1,4 +1,5 @@
 <template>
+  <navbar />
   <div class="bg-cyan-100 min-h-screen font-sans">
     <div class="max-w-sm mx-auto px-6">
       <div class="relative flex flex-wrap">
@@ -86,7 +87,12 @@
 </template>
 
 <script>
+import navbar from '../components/navbar.vue';
+
 export default {
+  components: {
+    navbar
+  },
   data() {
     return {
       username: '',
