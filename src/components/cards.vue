@@ -70,7 +70,7 @@ export default {
     };
 
     const addToFavourites = () => {
-      // Implement your favorite functionality here
+      
     };
 
     return { handleClick, addToCart, addToFavourites };
