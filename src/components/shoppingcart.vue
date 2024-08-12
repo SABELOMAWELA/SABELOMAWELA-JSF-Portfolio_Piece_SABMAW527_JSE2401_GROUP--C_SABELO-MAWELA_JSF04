@@ -11,8 +11,7 @@
               <div v-for="(product, index) in products" :key="index" class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 md:p-6">
                 <div class="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
                   <a href="#" class="shrink-0 md:order-1">
-                    <img :src="product.imageLight" class="h-20 w-20 dark:hidden" :alt="product.alt" />
-                    <img :src="product.imageDark" class="hidden h-20 w-20 dark:block" :alt="product.alt" />
+                    <img :src="product.image" class="object-contain h-48 mt-3" :alt="product.title" />
                   </a>
   
                   <label for="counter-input" class="sr-only">Choose quantity:</label>
@@ -36,7 +35,7 @@
                   </div>
   
                   <div class="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
-                    <a href="#" class="text-base font-medium text-gray-900 hover:underline dark:text-white">{{ product.name }}</a>
+                    <a href="#" class="text-base font-medium text-gray-900 hover:underline dark:text-white">   {{ product.title }}</a>
   
                     <div class="flex items-center gap-4">
                       <button type="button" class="inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-900 hover:underline dark:text-gray-400 dark:hover:text-white">
@@ -118,38 +117,31 @@
 
 <script>
 import navbar from '../components/navbar.vue';
+import { cartStore } from '../router/store';  
+ // Import the store
 
 export default {
   components: {
     navbar
   },
-  data() {
-    return {
-      products: [
-        {
-          name: 'Premium Apple iPhone 11 Pro Max',
-          imageLight: 'https://flowbite.s3.amazonaws.com/blocks/ecommerce-ui/iphone-light.png',
-          imageDark: 'https://flowbite.s3.amazonaws.com/blocks/ecommerce-ui/iphone-dark.png',
-          alt: 'Apple iPhone 11 Pro Max',
-          price: '$1,599.00',
-          quantity: 1,
-        },
-      ],
-    };
+  computed: {
+    products() {
+      return cartStore.products;
+    }
   },
   methods: {
     increment(index) {
       this.products[index].quantity++;
     },
     decrement(index) {
-      if (this.products[index].quantity > 0) {
+      if (this.products[index].quantity > 1) {
         this.products[index].quantity--;
       }
     },
     remove(index) {
-      this.products.splice(index, 1);
-    },
-  },
+      cartStore.removeFromCart(this.products[index].id);
+    }
+  }
 };
 </script>
 
