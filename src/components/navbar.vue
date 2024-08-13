@@ -4,14 +4,15 @@
       <nav class="bg-gray-500 border-gray-200">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <router-link to="/" class="text-lg font-bold text-white"> 
-          <span> 
-            <button class="flex items-center space-x-3 rtl:space-x-reverse">
-              <img src="../assets/online-shop.png" class="h-8" alt="Flowbite Logo" />
-              <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">
-                SwiftCart
-              </span>
-            </button>
-          </span>
+            <span> 
+              <button class="flex items-center space-x-3 rtl:space-x-reverse">
+                <img src="../assets/online-shop.png" class="h-8" alt="Flowbite Logo" />
+                <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">
+                  SwiftCart
+                </span>
+              </button>
+            </span>
+          </router-link>
           <button
             data-collapse-toggle="navbar-default"
             type="button"
@@ -36,7 +37,7 @@
               />
             </svg>
           </button>
-        </router-link>
+
           <div class="hidden w-full md:block md:w-auto" id="navbar-dropdown">
             <ul class="flex flex-col top-10 font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-500 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
               <li>
@@ -45,9 +46,9 @@
                 </span>
               </li>
               <li class="hidden lg:block md:block relative">
-                <div class="t-0 absolute left-3 -top-4">
+                <div class="t-0 absolute left-3 -top-4" v-if="cartCount > 0">
                   <p class="flex h-2 w-2 items-center justify-center rounded-full bg-red-500 p-3 text-xs text-white">
-                    2
+                    {{ cartCount }}
                   </p>
                 </div>
                 <router-link
@@ -90,3 +91,15 @@
     </header>
   </div>
 </template>
+
+<script>
+import { cartStore } from '../router/store';
+
+export default {
+  computed: {
+    cartCount() {
+      return cartStore.products.reduce((sum, product) => sum + product.quantity, 0);
+    }
+  }
+};
+</script>

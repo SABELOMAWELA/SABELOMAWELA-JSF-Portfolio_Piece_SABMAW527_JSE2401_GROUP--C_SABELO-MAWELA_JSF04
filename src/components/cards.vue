@@ -55,7 +55,6 @@
 <script>
 import { useRouter } from 'vue-router';
 import { cartStore } from '../router/store';  
- // Adjust the path to the store
 
 export default {
   name: 'cards',
