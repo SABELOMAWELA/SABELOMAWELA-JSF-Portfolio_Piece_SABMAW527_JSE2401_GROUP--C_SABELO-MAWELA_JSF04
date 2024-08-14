@@ -12,19 +12,19 @@
             <form class="mt-8">
               <div class="mx-auto max-w-lg">
                 <div class="py-2">
-                  <span class="px-1 text-sm text-gray-600">Username</span>
                   <input 
                     v-model="username"
                     type="text"
+                    placeholder="mor_2314"
                     class="text-md block px-3 py-2 rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
                   />
                 </div>
-                <div class="py-2" v-data="{ show: true }">
-                  <span class="px-1 text-sm text-gray-600">Password</span>
+                <div class="py-2">
                   <div class="relative">
                     <input 
                       v-model="password"
                       :type="show ? 'password' : 'text'"
+                      placeholder="83r5^_"
                       class="text-md block px-3 py-2 rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
                     />
                     <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
@@ -104,9 +104,32 @@ export default {
     togglePasswordVisibility() {
       this.show = !this.show;
     },
-    login() {
-     
-      console.log('Logging in with', this.username, this.password);
+    async login() {
+      try {
+        const response = await fetch('https://fakestoreapi.com/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json'
+          },
+          body: JSON.stringify({
+            username: this.username,
+            password: this.password
+          })
+        });
+        
+        const data = await response.json();
+
+        if (response.ok) {
+          console.log('Login successful:', data);
+          // Store the token or proceed with further actions
+        } else {
+          console.error('Login failed:', data);
+          // Handle login failure (e.g., show an error message)
+        }
+      } catch (error) {
+        console.error('An error occurred:', error);
+        // Handle any other errors (e.g., network issues)
+      }
     },
   },
 };
