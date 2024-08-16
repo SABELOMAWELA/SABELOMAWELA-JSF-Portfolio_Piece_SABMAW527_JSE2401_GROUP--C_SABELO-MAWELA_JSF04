@@ -18,3 +18,19 @@ export const cartStore = reactive({
     this.products = [];
   }
 });
+
+export const wishlistStore = reactive({
+  wishlist: [],
+  addToWishlist(product) {
+    const existingProduct = this.wishlist.find((p) => p.id === product.id);
+    if (!existingProduct) {
+      this.wishlist.push(product);
+    }
+  },
+  removeFromWishlist(productId) {
+    this.wishlist = this.wishlist.filter((product) => product.id !== productId);
+  },
+  clearWishlist() {
+    this.wishlist = [];
+  }
+});

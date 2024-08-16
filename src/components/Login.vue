@@ -121,14 +121,14 @@ export default {
 
         if (response.ok) {
           console.log('Login successful:', data);
-          // Store the token or proceed with further actions
+       
         } else {
           console.error('Login failed:', data);
-          // Handle login failure (e.g., show an error message)
+
         }
       } catch (error) {
         console.error('An error occurred:', error);
-        // Handle any other errors (e.g., network issues)
+       
       }
     },
   },

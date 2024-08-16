@@ -25,17 +25,17 @@
     <h3 class="text-xl font-bold mt-4">${{ product.price }}</h3>
 
     <div class="flex justify-between mt-4 space-x-4">
-      <button @click.stop="addToCart(product)" class="bg-cyan-700 hover:bg-cyan-900 flex-1 text-white font-bold py-2 px-4 rounded">
-        Add To Cart
-      </button>
+    <button @click.stop="addToCart(product)" class="bg-cyan-700 hover:bg-cyan-900 flex-1 text-white font-bold py-2 px-4 rounded">
+      Add To Cart
+    </button>
 
-      <button @click="addToFavourites" class="flex items-center justify-center flex-1 border border-red-500 text-red-500 hover:bg-red-500 hover:text-white font-bold py-2 px-4 rounded">
-        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
-        </svg>
-        <span class="ml-2">Add to Favorites</span>
-      </button>
-    </div>
+    <button @click="addToWishlist(product)" class="flex items-center justify-center flex-1 border border-red-500 text-red-500 hover:bg-red-500 hover:text-white font-bold py-2 px-4 rounded">
+      <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
+      </svg>
+      <span class="ml-2">Add to Favorites</span>
+    </button>
+  </div>
 
     <h2 class="text-lg font-bold mt-4">Description</h2>
     <p class="mt-2">{{ product.description }}</p>
@@ -46,7 +46,7 @@
 import navbar from '../components/navbar.vue';
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
-import { cartStore } from '../router/store'; 
+import { cartStore, wishlistStore } from '../router/store'; 
 
 export default {
   name: 'ProductDetail',
@@ -78,14 +78,14 @@ export default {
       cartStore.addToCart(product); 
     };
 
-    const addToFavourites = () => {
-      console.log(`${product.value.title} added to favorites!`);
-     
+    const addToWishlist = (product) => {
+      wishlistStore.addToWishlist(product);
+      console.log(`${product.title} added to wishlist!`);  // Debug line to ensure this is called
     };
 
     onMounted(fetchProduct);
 
-    return { product, loading, addToFavourites, addToCart };
+    return { product, loading, addToWishlist, addToCart };
   }
 };
 </script>
