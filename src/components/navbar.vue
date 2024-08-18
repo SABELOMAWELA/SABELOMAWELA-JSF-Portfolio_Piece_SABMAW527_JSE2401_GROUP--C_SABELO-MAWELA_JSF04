@@ -48,6 +48,14 @@
             
               </li>
             </router-link>
+            <router-link to="/Comparison" class="text-lg font-bold text-white"> 
+              <li>
+                <span class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">
+                  comparison
+                </span>
+            
+              </li>
+            </router-link>
               <li class="hidden lg:block md:block relative">
                 <div class="t-0 absolute left-3 -top-4" v-if="cartCount > 0">
                   <p class="flex h-2 w-2 items-center justify-center rounded-full bg-red-500 p-3 text-xs text-white">

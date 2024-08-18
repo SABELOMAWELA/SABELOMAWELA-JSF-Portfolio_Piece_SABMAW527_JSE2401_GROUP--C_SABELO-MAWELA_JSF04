@@ -4,6 +4,7 @@ import ProductDetail from '../components/ProductDetail.vue';
 import Login from '../components/Login.vue';
 import ShoppingCart from '../components/shoppingcart.vue'; 
 import Wishlist from '../components/Wishlist.vue';
+import Comparison from '../components/comparison.vue';
 
 const routes = [
   {
@@ -31,6 +32,11 @@ const routes = [
     path: '/wishlist', 
     name: 'Wishlist',
     component: Wishlist,
+  },
+  {
+    path: '/comparison', 
+    name: 'Comparison',
+    component: Comparison,
   },
 ];
 
