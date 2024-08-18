@@ -40,10 +40,14 @@
                   <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
                 </svg>
               </button>
+              <button @click.stop="addToComparison(product)">
+                <svg class="me-1.5 h-5 w-5 hover:fill-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" transform="scale(1.6)">
+                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 12H5m7 7V5" />
+                </svg>
+              </button>
               <button @click.stop="addToCart(product)" class="inline-flex justify-center whitespace-nowrap rounded-lg bg-cyan-700 px-3 py-2 text-sm font-medium text-white hover:bg-cyan-900 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 transition-colors">
                 Add To Cart
               </button>
-              
             </div>
           </div>
         </div>
@@ -54,7 +58,7 @@
 
 <script>
 import { useRouter } from 'vue-router';
-import { cartStore, wishlistStore } from '../router/store';  
+import { cartStore, wishlistStore,  } from '../router/store';
 
 export default {
   name: 'cards',
@@ -80,7 +84,12 @@ export default {
       console.log('Product added to wishlist:', product); 
     };
 
-    return { handleClick, addToCart, addToFavourites };
+    // const addToComparison = (product) => {
+    //   comparisonStore.addToComparison(product);
+    //   console.log('Product added to comparison:', product); 
+    // };
+
+    return { handleClick, addToCart, addToFavourites,  };
   }
 };
 </script>

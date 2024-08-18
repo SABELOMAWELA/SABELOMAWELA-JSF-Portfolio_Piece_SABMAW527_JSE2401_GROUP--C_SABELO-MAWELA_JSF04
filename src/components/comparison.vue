@@ -1,12 +1,12 @@
 <template>
     
-
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+<navbar/>
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg py-6">
     <table class="w-full text-sm text-left rtl:text-right text-blue-100 dark:text-blue-100">
         <thead class="text-xs text-white uppercase bg-blue-600 border-b border-blue-400 dark:text-white">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    Product name
+                    Product Image
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Color
@@ -25,7 +25,7 @@
         <tbody>
             <tr class="bg-blue-600 border-b border-blue-400 hover:bg-blue-500">
                 <th scope="row" class="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
-                    Apple MacBook Pro 17"
+                   Product Title
                 </th>
                 <td class="px-6 py-4">
                     Silver
@@ -42,7 +42,7 @@
             </tr>
             <tr class="bg-blue-600 border-b border-blue-400 hover:bg-blue-500">
                 <th scope="row" class="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
-                    Microsoft Surface Pro
+                    description 
                 </th>
                 <td class="px-6 py-4">
                     White
@@ -59,7 +59,7 @@
             </tr>
             <tr class="bg-blue-600 border-b border-blue-400 hover:bg-blue-500">
                 <th scope="row" class="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
-                    Magic Mouse 2
+                    Rating
                 </th>
                 <td class="px-6 py-4">
                     Black
@@ -92,8 +92,8 @@
                 </td>
             </tr>
             <tr class="bg-blue-600 border-blue-400 hover:bg-blue-500">
-                <th scope="row" class="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
-                    Apple Watch 5
+                <th scope="col" class="px-6 py-3">
+                    Action
                 </th>
                 <td class="px-6 py-4">
                     Red
@@ -104,12 +104,18 @@
                 <td class="px-6 py-4">
                     $999
                 </td>
-                <td class="px-6 py-4">
-                    <a href="#" class="font-medium text-white hover:underline">Edit</a>
-                </td>
+               
             </tr>
         </tbody>
     </table>
 </div>
 
 </template>
+<script>
+import navbar from './navbar.vue';
+export default {
+  components: {
+    navbar
+  },
+};
+</script>

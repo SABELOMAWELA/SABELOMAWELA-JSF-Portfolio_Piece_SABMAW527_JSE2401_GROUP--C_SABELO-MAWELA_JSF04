@@ -80,7 +80,7 @@ export default {
 
     const addToWishlist = (product) => {
       wishlistStore.addToWishlist(product);
-      console.log(`${product.title} added to wishlist!`);  // Debug line to ensure this is called
+      console.log(`${product.title} added to wishlist!`);  
     };
 
     onMounted(fetchProduct);
