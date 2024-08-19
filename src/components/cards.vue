@@ -58,7 +58,7 @@
 
 <script>
 import { useRouter } from 'vue-router';
-import { cartStore, wishlistStore,  } from '../router/store';
+import { cartStore, wishlistStore, comparisonStore } from '../router/store';
 
 export default {
   name: 'cards',
@@ -84,12 +84,11 @@ export default {
       console.log('Product added to wishlist:', product); 
     };
 
-    // const addToComparison = (product) => {
-    //   comparisonStore.addToComparison(product);
-    //   console.log('Product added to comparison:', product); 
-    // };
+    const addToComparison = (product) => {
+      comparisonStore.addToComparison(product);
+    };
 
-    return { handleClick, addToCart, addToFavourites,  };
+    return { handleClick, addToCart, addToFavourites, addToComparison };
   }
 };
 </script>

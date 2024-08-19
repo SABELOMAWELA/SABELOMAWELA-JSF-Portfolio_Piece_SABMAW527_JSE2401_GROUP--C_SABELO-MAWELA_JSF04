@@ -34,3 +34,19 @@ export const wishlistStore = reactive({
     this.wishlist = [];
   }
 });
+
+export const comparisonStore = reactive({
+  comparison: [],
+  addToComparison(product) {
+    const existingProduct = this.comparison.find((p) => p.id === product.id);
+    if (!existingProduct) {
+      this.comparison.push(product);
+    }
+  },
+  removeFromComparison(productId) {
+    this.comparison = this.comparison.filter((product) => product.id !== productId);
+  },
+  clearComparison() {
+    this.comparison = [];
+  }
+});
