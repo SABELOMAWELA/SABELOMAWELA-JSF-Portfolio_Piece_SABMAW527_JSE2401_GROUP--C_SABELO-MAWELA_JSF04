@@ -2,7 +2,15 @@
   <div>
     <navbar />
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg max-w-2xl mx-auto mt-6">
-      <h1 class="text-2xl font-bold mb-4 p-6 bg-white">Wishlist</h1>
+      <h1 class="text-2xl font-bold mb-4 p-6 bg-white flex justify-between items-center">
+        Wishlist
+        <button 
+          v-if="wishlist.length > 0" 
+          @click="clearWishlist" 
+          class="text-red-600 hover:text-red-800 text-sm">
+          Clear All
+        </button>
+      </h1>
       <div v-if="wishlist.length === 0" class="text-gray-500 p-6 bg-white">Your wishlist is empty.</div>
       <table v-else class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -116,10 +124,10 @@ export default {
       }
     };
 
-    const addToCart = (item) => {
-    
-      console.log(`Add ${item.title} to cart`);
+    const addToCart = (product) => {
+      cartStore.addToCart(product);
     };
+
 
     return { wishlist, removeFromWishlist, updateQuantity, increaseQuantity, decreaseQuantity, addToCart };
   }

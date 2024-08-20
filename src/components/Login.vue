@@ -9,7 +9,7 @@
             <div class="text-center font-bold text-gray-700">
               Welcome to SwiftCart! Log in to continue your seamless shopping journey.
             </div>
-            <form class="mt-8">
+            <form class="mt-8" @submit.prevent="login">
               <div class="mx-auto max-w-lg">
                 <div class="py-2">
                   <input 
@@ -17,15 +17,17 @@
                     type="text"
                     placeholder="mor_2314"
                     class="text-md block px-3 py-2 rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
+                    required
                   />
                 </div>
                 <div class="py-2">
                   <div class="relative">
                     <input 
                       v-model="password"
-                      :type="show ? 'password' : 'text'"
+                      :type="show ? 'text' : 'password'"
                       placeholder="83r5^_"
                       class="text-md block px-3 py-2 rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
+                      required
                     />
                     <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
                       <svg
@@ -73,10 +75,11 @@
                 </div>
                 <button
                   class="mt-3 text-lg font-semibold bg-gray-800 w-full text-white rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-black"
-                  @click.prevent="login"
                 >
                   Login
                 </button>
+                <div v-if="loading" class="text-center text-gray-500 mt-4">Logging in...</div>
+                <div v-if="error" class="text-center text-red-500 mt-4">{{ error }}</div>
               </div>
             </form>
           </div>
@@ -97,45 +100,50 @@ export default {
     return {
       username: '',
       password: '',
-      show: true,
+      show: false,
+      loading: false,
+      error: ''
     };
   },
   methods: {
-  togglePasswordVisibility() {
-    this.show = !this.show;
-  },
-  async login() {
-    try {
-      const response = await fetch('https://fakestoreapi.com/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json'
-        },
-        body: JSON.stringify({
-          username: this.username,
-          password: this.password
-        })
-      });
+    togglePasswordVisibility() {
+      this.show = !this.show;
+    },
+    async login() {
+      if (!this.username || !this.password) {
+        this.error = 'Username and password cannot be empty.';
+        return;
+      }
 
-      
-      const contentType = response.headers.get('content-type');
-      if (contentType && contentType.includes('application/json')) {
-        const data = await response.json();
+      this.loading = true;
+      this.error = '';
+
+      try {
+        const response = await fetch('https://fakestoreapi.com/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json'
+          },
+          body: JSON.stringify({
+            username: this.username,
+            password: this.password
+          })
+        });
 
         if (response.ok) {
-          console.log('Login successful:', data);
+          const data = await response.json();
           localStorage.setItem('authToken', data.token);
-          this.$router.push({ name: 'Home' });
+          this.$router.push(this.$route.query.redirect || { name: 'Home' });
         } else {
-          console.error('Login failed:', data);
+          const data = await response.json();
+          this.error = data.message || 'Login failed. Please try again.';
         }
-      } else {
-        console.error('Unexpected response format:', await response.text());
+      } catch (error) {
+        this.error = 'An error occurred. Please try again.';
+      } finally {
+        this.loading = false;
       }
-    } catch (error) {
-      console.error('An error occurred:', error);
     }
-  },
-}
+  }
 };
 </script>
