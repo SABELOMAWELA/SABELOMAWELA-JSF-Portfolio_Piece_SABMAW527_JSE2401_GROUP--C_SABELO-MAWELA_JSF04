@@ -6,7 +6,7 @@
           <router-link to="/" class="text-lg font-bold text-white"> 
             <span> 
               <button class="flex items-center space-x-3 rtl:space-x-reverse">
-                <img src="../assets/online-shop.png" class="h-8" alt="Flowbite Logo" />
+                <img src="../assets/online-shop.png" class="h-8" alt="SwiftCart Logo" />
                 <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">
                   SwiftCart
                 </span>
@@ -51,7 +51,7 @@
             <router-link to="/Comparison" class="text-lg font-bold text-white"> 
               <li>
                 <span class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">
-                  comparison
+                  Comparison
                 </span>
             
               </li>
@@ -87,13 +87,21 @@
                   Cart
                 </span>
               </li>
-              <li>
+              <li v-if="!isAuthenticated">
                 <router-link
                   to="/login"
                   class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
                 >
                   Login
                 </router-link>
+              </li>
+              <li v-else>
+                <button
+                  @click="logout"
+                  class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
+                >
+                  Logout
+                </button>
               </li>
             </ul>
           </div>
@@ -110,6 +118,15 @@ export default {
   computed: {
     cartCount() {
       return cartStore.products.reduce((sum, product) => sum + product.quantity, 0);
+    },
+    isAuthenticated() {
+      return !!localStorage.getItem('authToken'); 
+    }
+  },
+  methods: {
+    logout() {
+      localStorage.removeItem('authToken'); 
+      this.$router.push({ name: 'Login' });
     }
   }
 };
