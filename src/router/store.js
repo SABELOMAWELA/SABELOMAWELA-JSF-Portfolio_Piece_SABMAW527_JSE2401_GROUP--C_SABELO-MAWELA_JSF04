@@ -1,4 +1,3 @@
-// store.js
 import { reactive } from 'vue';
 
 export const cartStore = reactive({
@@ -14,9 +13,6 @@ export const cartStore = reactive({
   removeFromCart(productId) {
     this.products = this.products.filter((product) => product.id !== productId);
   },
-  clearCart() {
-    this.products = [];
-  }
 });
 
 export const wishlistStore = reactive({
@@ -31,8 +27,8 @@ export const wishlistStore = reactive({
     this.wishlist = this.wishlist.filter((product) => product.id !== productId);
   },
   clearWishlist() {
-    this.wishlist = [];
-  }
+    this.wishlist.length = 0;
+  },
 });
 
 export const comparisonStore = reactive({
@@ -48,5 +44,5 @@ export const comparisonStore = reactive({
   },
   clearComparison() {
     this.comparison = [];
-  }
+  },
 });
