@@ -6,6 +6,11 @@ import ShoppingCart from '../components/shoppingcart.vue';
 import Wishlist from '../components/Wishlist.vue';
 import Comparison from '../components/comparison.vue';
 
+const isAuthenticated = () => {
+ 
+  return !!localStorage.getItem('authToken'); 
+};
+
 const routes = [
   {
     path: '/',
@@ -27,16 +32,37 @@ const routes = [
     path: '/cart', 
     name: 'ShoppingCart',
     component: ShoppingCart,
+    beforeEnter: (to, from, next) => {
+      if (!isAuthenticated()) {
+        next('/login'); 
+      } else {
+        next(); 
+      }
+    }
   },
   {
     path: '/wishlist', 
     name: 'Wishlist',
     component: Wishlist,
+    beforeEnter: (to, from, next) => {
+      if (!isAuthenticated()) {
+        next('/login');
+      } else {
+        next();
+      }
+    }
   },
   {
     path: '/comparison', 
     name: 'Comparison',
     component: Comparison,
+    beforeEnter: (to, from, next) => {
+      if (!isAuthenticated()) {
+        next('/login');
+      } else {
+        next();
+      }
+    }
   },
 ];
 

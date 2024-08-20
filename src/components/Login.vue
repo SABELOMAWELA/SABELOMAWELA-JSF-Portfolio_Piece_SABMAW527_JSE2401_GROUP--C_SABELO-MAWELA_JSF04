@@ -101,36 +101,41 @@ export default {
     };
   },
   methods: {
-    togglePasswordVisibility() {
-      this.show = !this.show;
-    },
-    async login() {
-      try {
-        const response = await fetch('https://fakestoreapi.com/auth/login', {
-          method: 'POST',
-          headers: {
-            'Content-type': 'application/json'
-          },
-          body: JSON.stringify({
-            username: this.username,
-            password: this.password
-          })
-        });
-        
+  togglePasswordVisibility() {
+    this.show = !this.show;
+  },
+  async login() {
+    try {
+      const response = await fetch('https://fakestoreapi.com/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify({
+          username: this.username,
+          password: this.password
+        })
+      });
+
+      
+      const contentType = response.headers.get('content-type');
+      if (contentType && contentType.includes('application/json')) {
         const data = await response.json();
 
         if (response.ok) {
           console.log('Login successful:', data);
-       
+          localStorage.setItem('authToken', data.token);
+          this.$router.push({ name: 'Home' });
         } else {
           console.error('Login failed:', data);
-
         }
-      } catch (error) {
-        console.error('An error occurred:', error);
-       
+      } else {
+        console.error('Unexpected response format:', await response.text());
       }
-    },
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
   },
+}
 };
 </script>
