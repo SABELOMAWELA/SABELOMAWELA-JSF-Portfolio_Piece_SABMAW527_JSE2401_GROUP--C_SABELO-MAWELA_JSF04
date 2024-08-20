@@ -5,6 +5,8 @@ import Login from '../components/Login.vue';
 import ShoppingCart from '../components/shoppingcart.vue'; 
 import Wishlist from '../components/Wishlist.vue';
 import Comparison from '../components/comparison.vue';
+import checkout from '../components/checkout.vue';
+import Checkout from '../components/checkout.vue';
 
 const isAuthenticated = () => {
   return !!localStorage.getItem('authToken'); 
@@ -32,6 +34,11 @@ const routes = [
     name: 'Login',
     component: Login,
   },
+  {
+  path: '/checkout',
+  name: 'Checkout',
+  component: Checkout,
+},
   {
     path: '/cart', 
     name: 'ShoppingCart',

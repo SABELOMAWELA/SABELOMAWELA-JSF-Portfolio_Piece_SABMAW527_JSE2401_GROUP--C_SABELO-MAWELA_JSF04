@@ -12,7 +12,6 @@
         </button>
       </h1>
 
-      <!-- Sorting and Filtering Controls -->
       <div class="flex justify-between p-4 bg-white">
         <div>
           <label for="filter" class="block text-sm font-medium text-gray-700">Filter by Category:</label>
