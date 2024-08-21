@@ -81,6 +81,11 @@ import { cartStore, wishlistStore, comparisonStore } from '../router/store';
 export default {
   name: 'cards',
   props: {
+    /**
+     * Array of product objects to be displayed in the card grid.
+     * @type {Array<Object>}
+     * @required
+     */
     products: {
       type: Array,
       required: true
@@ -88,10 +93,18 @@ export default {
   },
   data() {
     return {
-      theme: localStorage.getItem('theme') || 'light', // Default theme
+      /**
+       * The current theme of the application, either 'light' or 'dark'.
+       * @type {string}
+       */
+      theme: localStorage.getItem('theme') || 'light',
     };
   },
   watch: {
+    /**
+     * Watches for changes to the theme and updates the DOM accordingly.
+     * @param {string} newTheme - The new theme value.
+     */
     theme(newTheme) {
       document.documentElement.classList.remove('light', 'dark');
       document.documentElement.classList.add(newTheme);
@@ -100,27 +113,58 @@ export default {
     }
   },
   methods: {
+    /**
+     * Toggles the application theme between 'light' and 'dark'.
+     */
     toggleTheme() {
       this.theme = this.theme === 'light' ? 'dark' : 'light';
     },
+    
+    /**
+     * Updates the background color of the document body based on the theme.
+     * @param {string} theme - The current theme ('light' or 'dark').
+     */
     updateBackgroundColor(theme) {
       document.body.className = theme === 'dark' ? 'bg-gray-900' : 'bg-slate-50';
     },
+    
+    /**
+     * Handles the click event on a product card and navigates to the product detail page.
+     * @param {string} id - The ID of the product.
+     */
     handleClick(id) {
       this.$router.push({ name: 'ProductDetail', params: { id } });
     },
+    
+    /**
+     * Adds a product to the shopping cart.
+     * @param {Object} product - The product object to add to the cart.
+     */
     addToCart(product) {
       cartStore.addToCart(product);
     },
+    
+    /**
+     * Adds a product to the wishlist.
+     * @param {Object} product - The product object to add to the wishlist.
+     */
     addToFavourites(product) {
       wishlistStore.addToWishlist(product);
       console.log('Product added to wishlist:', product);
     },
+    
+    /**
+     * Adds a product to the comparison list.
+     * @param {Object} product - The product object to add to the comparison list.
+     */
     addToComparison(product) {
       comparisonStore.addToComparison(product);
     }
   },
   created() {
+    /**
+     * Sets up the initial theme when the component is created.
+     */
     document.documentElement.classList.add(this.theme);
     this.updateBackgroundColor(this.theme);
   }

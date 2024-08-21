@@ -61,6 +61,11 @@
 export default {
   name: 'FilterSortComponent',
   props: {
+    /**
+     * An array of category names to display in the dropdown filter.
+     * @type {Array<string>}
+     * @required
+     */
     categories: {
       type: Array,
       required: true,
@@ -68,24 +73,59 @@ export default {
   },
   data() {
     return {
+      /**
+       * The currently selected filter item.
+       * @type {string}
+       */
       filterItem: 'Select Category',
+      
+      /**
+       * Boolean flag to control the visibility of the dropdown menu.
+       * @type {boolean}
+       */
       dropdownOpen: false,
+      
+      /**
+       * The current search term entered by the user.
+       * @type {string}
+       */
       searchTerm: '',
+      
+      /**
+       * The current sorting option selected by the user.
+       * @type {string}
+       */
       sorting: ''
     };
   },
   methods: {
+    /**
+     * Toggles the visibility of the dropdown menu.
+     */
     toggleDropdown() {
       this.dropdownOpen = !this.dropdownOpen;
     },
+    
+    /**
+     * Handles filtering by setting the selected category and emitting a filter event.
+     * @param {string} category - The category to filter by.
+     */
     handleFilter(category) {
       this.filterItem = category || 'All Categories';
       this.dropdownOpen = false;
       this.$emit('filter', category);
     },
+    
+    /**
+     * Emits the current search term to the parent component.
+     */
     handleSearch() {
       this.$emit('search', this.searchTerm);
     },
+    
+    /**
+     * Emits the selected sorting option to the parent component.
+     */
     handleSort() {
       this.$emit('sort', this.sorting);
     }

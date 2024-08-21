@@ -94,21 +94,58 @@ import navbar from '../components/navbar.vue';
 
 export default {
   components: {
+    /**
+     * The navbar component imported from `navbar.vue`.
+     * @type {Object}
+     */
     navbar
   },
   data() {
     return {
+      /**
+       * The username input field value.
+       * @type {string}
+       */
       username: '',
+      
+      /**
+       * The password input field value.
+       * @type {string}
+       */
       password: '',
+      
+      /**
+       * A boolean indicating whether the password field is in 'text' or 'password' mode.
+       * @type {boolean}
+       */
       show: false,
+      
+      /**
+       * A boolean indicating whether the login process is in progress.
+       * @type {boolean}
+       */
       loading: false,
+      
+      /**
+       * A string representing any error message that may occur during login.
+       * @type {string}
+       */
       error: ''
     };
   },
   methods: {
+    /**
+     * Toggles the visibility of the password field between 'text' and 'password'.
+     */
     togglePasswordVisibility() {
       this.show = !this.show;
     },
+    
+    /**
+     * Handles the login process by sending a POST request to the authentication API.
+     * Emits an error message if the login fails.
+     * @returns {Promise<void>}
+     */
     async login() {
       if (!this.username || !this.password) {
         this.error = 'Username and password cannot be empty.';

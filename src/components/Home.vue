@@ -19,16 +19,54 @@ import navbar from '../components/navbar.vue';
 import cards from '../components/cards.vue';
 import FilterSortComponent from '../components/FilterSortComponent.vue';
 
+/**
+ * A reactive reference to store the list of products.
+ * @type {import('vue').Ref<Array<Object>>}
+ */
 const products = ref([]);
+
+/**
+ * A reactive reference to store the filtered list of products.
+ * @type {import('vue').Ref<Array<Object>>}
+ */
 const filteredProducts = ref([]);
+
+/**
+ * A reactive reference to store the list of categories.
+ * @type {import('vue').Ref<Array<string>>}
+ */
 const categories = ref([]);
+
+/**
+ * A reactive reference to store the current search term.
+ * @type {import('vue').Ref<string>}
+ */
 const searchTerm = ref('');
+
+/**
+ * A reactive reference to store the currently selected category.
+ * @type {import('vue').Ref<string>}
+ */
 const selectedCategory = ref('');
+
+/**
+ * A reactive reference to store the selected sorting option.
+ * @type {import('vue').Ref<string>}
+ */
 const sorting = ref('');
+
+/**
+ * A reactive reference to indicate whether data is being loaded.
+ * @type {import('vue').Ref<boolean>}
+ */
 const loading = ref(true);
 
+/**
+ * Fetches product data from the API and sets the products, categories, and loading state.
+ * @returns {Promise<void>}
+ */
 function fetchData() {
-  axios.get('https://fakestoreapi.com/products')
+  return axios.get('https://fakestoreapi.com/products')
     .then(res => {
       products.value = res.data;
       filteredProducts.value = res.data;
@@ -41,8 +79,9 @@ function fetchData() {
     });
 }
 
-onMounted(() => fetchData());
-
+/**
+ * Filters and sorts the products based on the current search term, category, and sorting option.
+ */
 function filterProducts() {
   let tempProducts = [...products.value];
 
@@ -65,18 +104,35 @@ function filterProducts() {
   filteredProducts.value = tempProducts;
 }
 
+/**
+ * Handles the filter event from the FilterSortComponent.
+ * @param {string} category - The category to filter products by.
+ */
 function handleFilter(category) {
   selectedCategory.value = category;
   filterProducts();
 }
 
+/**
+ * Handles the search event from the FilterSortComponent.
+ * @param {string} term - The search term to filter products by.
+ */
 function handleSearch(term) {
   searchTerm.value = term;
   filterProducts();
 }
 
+/**
+ * Handles the sort event from the FilterSortComponent.
+ * @param {string} order - The sorting option to sort products by.
+ */
 function handleSort(order) {
   sorting.value = order;
   filterProducts();
 }
+
+/**
+ * Lifecycle hook that fetches data when the component is mounted.
+ */
+onMounted(() => fetchData());
 </script>

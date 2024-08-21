@@ -386,9 +386,14 @@
       </section>
 </template>
 <script>
-import navbar from "./navbar.vue"
+import navbar from "./navbar.vue";
+
 export default {
   components: {
+    /**
+     * The navbar component imported from `navbar.vue`.
+     */
     navbar
-  },};
+  },
+};
 </script>

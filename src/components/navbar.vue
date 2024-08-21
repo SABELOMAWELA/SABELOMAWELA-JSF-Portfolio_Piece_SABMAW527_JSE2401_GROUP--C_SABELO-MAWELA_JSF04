@@ -144,22 +144,39 @@ import { cartStore, wishlistStore } from '../router/store';
 
 export default {
   computed: {
+    /**
+     * Calculate the total number of items in the cart.
+     * @returns {number} The total quantity of items in the cart.
+     */
     cartCount() {
       return cartStore.products.reduce((sum, product) => sum + product.quantity, 0);
     },
+    
+    /**
+     * Get the total number of items in the wishlist.
+     * @returns {number} The number of items in the wishlist.
+     */
     wishlistCount() {
-      return wishlistStore.wishlist.length; // Calculate the total number of items in the wishlist
+      return wishlistStore.wishlist.length;
     },
+    
+    /**
+     * Check if the user is authenticated.
+     * @returns {boolean} True if the user is authenticated, false otherwise.
+     */
     isAuthenticated() {
-      return !!localStorage.getItem('authToken'); 
+      return !!localStorage.getItem('authToken');
     }
   },
+  
   methods: {
+    /**
+     * Logs the user out by removing the authentication token and redirects to the login page.
+     */
     logout() {
-      localStorage.removeItem('authToken'); 
+      localStorage.removeItem('authToken');
       this.$router.push({ name: 'Login' });
     }
   }
 };
 </script>
-

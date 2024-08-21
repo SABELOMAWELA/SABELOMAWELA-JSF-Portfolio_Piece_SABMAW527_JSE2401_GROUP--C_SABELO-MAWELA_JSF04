@@ -92,20 +92,45 @@ import { ref, computed } from 'vue';
 import navbar from './navbar.vue';
 import { wishlistStore, cartStore } from '../router/store';
 
+/**
+ * Vue component for displaying and managing a wishlist.
+ */
 export default {
   components: {
     navbar
   },
   setup() {
+    /**
+     * The list of items in the wishlist.
+     * @type {Array<Object>}
+     */
     const wishlist = wishlistStore.wishlist;
+
+    /**
+     * The currently selected category for filtering the wishlist.
+     * @type {Ref<string>}
+     */
     const selectedCategory = ref('');
+
+    /**
+     * The selected sorting option for the wishlist.
+     * @type {Ref<string>}
+     */
     const sortBy = ref('priceAsc');
 
+    /**
+     * Computed property that returns the unique categories present in the wishlist.
+     * @type {ComputedRef<Array<string>>}
+     */
     const categories = computed(() => {
       const categorySet = new Set(wishlist.map(item => item.category));
       return [...categorySet];
     });
 
+    /**
+     * Computed property that returns the wishlist items filtered and sorted based on the selected options.
+     * @type {ComputedRef<Array<Object>>}
+     */
     const filteredAndSortedWishlist = computed(() => {
       let filtered = wishlist;
 
@@ -126,14 +151,26 @@ export default {
       return filtered;
     });
 
+    /**
+     * Clears all items from the wishlist.
+     */
     const clearWishlist = () => {
       wishlistStore.clearWishlist();
     };
 
+    /**
+     * Removes an item from the wishlist at the specified index.
+     * @param {number} index - The index of the item to remove.
+     */
     const removeFromWishlist = (index) => {
       wishlistStore.wishlist.splice(index, 1);
     };
 
+    /**
+     * Updates the quantity of the specified item.
+     * @param {Object} item - The item whose quantity is to be updated.
+     * @param {string} quantity - The new quantity value.
+     */
     const updateQuantity = (item, quantity) => {
       const parsedQuantity = parseInt(quantity, 10);
       if (!isNaN(parsedQuantity) && parsedQuantity > 0) {
@@ -141,16 +178,28 @@ export default {
       }
     };
 
+    /**
+     * Increases the quantity of the specified item by one.
+     * @param {Object} item - The item whose quantity is to be increased.
+     */
     const increaseQuantity = (item) => {
       item.quantity++;
     };
 
+    /**
+     * Decreases the quantity of the specified item by one, ensuring it does not go below 1.
+     * @param {Object} item - The item whose quantity is to be decreased.
+     */
     const decreaseQuantity = (item) => {
       if (item.quantity > 1) {
         item.quantity--;
       }
     };
 
+    /**
+     * Adds the specified item to the cart.
+     * @param {Object} product - The product to add to the cart.
+     */
     const addToCart = (product) => {
       cartStore.addToCart(product);
     };

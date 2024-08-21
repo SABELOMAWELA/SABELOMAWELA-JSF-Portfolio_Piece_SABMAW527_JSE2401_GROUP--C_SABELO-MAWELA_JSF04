@@ -137,45 +137,88 @@
 import navbar from '../components/navbar.vue';
 import { cartStore } from '../router/store';
 
+/**
+ * ShoppingCart component.
+ * 
+ * This component displays a shopping cart with products, allowing the user to adjust quantities, remove items, and clear the cart.
+ * It also displays an order summary including the original price, savings, tax, and total.
+ */
 export default {
   components: {
     navbar
   },
   computed: {
+    /**
+     * Returns the list of products in the cart.
+     * @returns {Array} List of products.
+     */
     products() {
       return cartStore.products;
     },
+    /**
+     * Calculates the original price of all products in the cart.
+     * @returns {number} The total original price.
+     */
     originalPrice() {
       return this.products.reduce((sum, product) => sum + product.price * product.quantity, 0);
     },
+    /**
+     * Calculates the savings on the cart.
+     * Currently set to 0.
+     * @returns {number} The total savings.
+     */
     savings() {
-      return 0; 
+      return 0;
     },
+    /**
+     * Calculates the tax on the cart based on the original price and savings.
+     * @returns {number} The total tax.
+     */
     tax() {
-      return (this.originalPrice - this.savings) * 0.15; 
+      return (this.originalPrice - this.savings) * 0.15;
     },
+    /**
+     * Calculates the total amount after applying savings and tax.
+     * @returns {number} The total amount.
+     */
     total() {
-      return this.originalPrice - this.savings + this.tax; 
+      return this.originalPrice - this.savings + this.tax;
     }
   },
   methods: {
+    /**
+     * Increments the quantity of a product at a given index.
+     * @param {number} index - The index of the product to increment.
+     */
     increment(index) {
       this.products[index].quantity++;
     },
+    /**
+     * Decrements the quantity of a product at a given index.
+     * The quantity will not go below 1.
+     * @param {number} index - The index of the product to decrement.
+     */
     decrement(index) {
       if (this.products[index].quantity > 1) {
         this.products[index].quantity--;
       }
     },
+    /**
+     * Removes a product from the cart based on its index.
+     * @param {number} index - The index of the product to remove.
+     */
     remove(index) {
       cartStore.removeFromCart(this.products[index].id);
     },
+    /**
+     * Clears all products from the cart.
+     */
     clearCart() {
-    const clearCart = () => {
-      cartStore.clearCart();
-    };
-    clearCart();  // Call the clearCart function to clear the cart
-  },
+      const clearCart = () => {
+        cartStore.clearCart();
+      };
+      clearCart();  // Call the clearCart function to clear the cart
+    }
   }
 };
 </script>

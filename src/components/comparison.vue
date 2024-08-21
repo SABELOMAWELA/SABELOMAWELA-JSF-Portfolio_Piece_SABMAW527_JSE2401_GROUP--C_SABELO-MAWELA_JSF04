@@ -74,14 +74,24 @@
   export default {
     name: 'ComparisonList',
     components: {
+      /**
+       * The navbar component imported from `navbar.vue`.
+       */
       navbar,
     },
     setup() {
+      /**
+       * Removes a product from the comparison list.
+       * @param {string} productId - The ID of the product to remove from the comparison list.
+       */
       const removeFromComparison = (productId) => {
         comparisonStore.removeFromComparison(productId);
       };
   
-     
+      /**
+       * A computed property that returns the first 4 products from the comparison list.
+       * @returns {Array<Object>} The first 4 products in the comparison list.
+       */
       const limitedComparison = computed(() =>
         comparisonStore.comparison.slice(0, 4)
       );
@@ -90,4 +100,5 @@
     },
   };
   </script>
+  
   

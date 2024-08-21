@@ -5,18 +5,28 @@ import Login from '../components/Login.vue';
 import ShoppingCart from '../components/shoppingcart.vue'; 
 import Wishlist from '../components/Wishlist.vue';
 import Comparison from '../components/comparison.vue';
-import checkout from '../components/checkout.vue';
 import Checkout from '../components/checkout.vue';
 
+/**
+ * Checks if the user is authenticated by verifying the presence of an auth token in local storage.
+ * @returns {boolean} True if the user is authenticated, false otherwise.
+ */
 const isAuthenticated = () => {
-  return !!localStorage.getItem('authToken'); 
+  return !!localStorage.getItem('authToken');
 };
 
+/**
+ * Logs out the user by removing the auth token from local storage and reloading the page.
+ */
 const logout = () => {
   localStorage.removeItem('authToken');
   window.location.reload();
 };
 
+/**
+ * The list of route definitions for the application.
+ * @type {Array<Object>}
+ */
 const routes = [
   {
     path: '/',
@@ -35,24 +45,24 @@ const routes = [
     component: Login,
   },
   {
-  path: '/checkout',
-  name: 'Checkout',
-  component: Checkout,
-},
+    path: '/checkout',
+    name: 'Checkout',
+    component: Checkout,
+  },
   {
-    path: '/cart', 
+    path: '/cart',
     name: 'ShoppingCart',
     component: ShoppingCart,
     beforeEnter: (to, from, next) => {
       if (!isAuthenticated()) {
-        next('/login'); 
+        next('/login');
       } else {
-        next(); 
+        next();
       }
     }
   },
   {
-    path: '/wishlist', 
+    path: '/wishlist',
     name: 'Wishlist',
     component: Wishlist,
     beforeEnter: (to, from, next) => {
@@ -64,7 +74,7 @@ const routes = [
     }
   },
   {
-    path: '/comparison', 
+    path: '/comparison',
     name: 'Comparison',
     component: Comparison,
     beforeEnter: (to, from, next) => {
@@ -77,11 +87,14 @@ const routes = [
   },
 ];
 
+/**
+ * Creates a Vue Router instance with history mode and the defined routes.
+ * @type {Router}
+ */
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
 });
 
-export { isAuthenticated, logout }; 
-
+export { isAuthenticated, logout };
 export default router;

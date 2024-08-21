@@ -56,6 +56,10 @@ export default {
     navbar
   },
   props: {
+    /**
+     * The ID of the product to display.
+     * @type {String}
+     */
     id: {
       type: String,
       required: true
@@ -65,6 +69,12 @@ export default {
     const product = ref({});
     const loading = ref(true);
 
+    /**
+     * Fetch the product details from the API.
+     * Sets `product` and `loading` based on the API response.
+     * Catches and logs any errors encountered during the fetch.
+     * @async
+     */
     const fetchProduct = async () => {
       try {
         const response = await axios.get(`https://fakestoreapi.com/products/${props.id}`);
@@ -76,10 +86,19 @@ export default {
       }
     };
 
+    /**
+     * Add a product to the cart.
+     * @param {Object} product - The product to add to the cart.
+     */
     const addToCart = (product) => {
       cartStore.addToCart(product); 
     };
 
+    /**
+     * Add a product to the wishlist.
+     * Logs a message to the console after adding.
+     * @param {Object} product - The product to add to the wishlist.
+     */
     const addToWishlist = (product) => {
       wishlistStore.addToWishlist(product);
       console.log(`${product.title} added to wishlist!`);  
