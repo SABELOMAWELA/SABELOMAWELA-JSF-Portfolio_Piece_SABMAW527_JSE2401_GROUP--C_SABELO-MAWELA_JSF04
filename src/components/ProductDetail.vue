@@ -25,8 +25,10 @@
     <h3 class="text-xl font-bold mt-4">${{ product.price }}</h3>
 
     <div class="flex justify-between mt-4 space-x-4">
-    <button @click.stop="addToCart(product)" class="bg-cyan-700 hover:bg-cyan-900 flex-1 text-white font-bold py-2 px-4 rounded">
-      Add To Cart
+    <button @click.stop="addToCart(product)" class="flex items-center justify-center flex-1 bg-cyan-700 hover:bg-cyan-900 hover:text-white font-bold py-2 px-4 rounded">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" class="file: h-6 w-6 #a3e635 cursor-pointer">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/>
+      </svg>Add To Cart
     </button>
 
     <button @click="addToWishlist(product)" class="flex items-center justify-center flex-1 border border-red-500 text-red-500 hover:bg-red-500 hover:text-white font-bold py-2 px-4 rounded">

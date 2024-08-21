@@ -13,6 +13,9 @@ export const cartStore = reactive({
   removeFromCart(productId) {
     this.products = this.products.filter((product) => product.id !== productId);
   },
+  clearCart() { 
+    this.products.length = 0;// Clear the products array
+  },
 });
 
 export const wishlistStore = reactive({
