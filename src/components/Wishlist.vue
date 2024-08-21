@@ -1,7 +1,7 @@
 <template>
   <div>
     <navbar />
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg max-w-2xl mx-auto mt-6">
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-4/5 mx-auto mt-6">
       <h1 class="text-2xl font-bold mb-4 p-6 bg-white flex justify-between items-center">
         Wishlist
         <button 

@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="sticky z-50 top-0">
-      <nav class="bg-gray-500 border-gray-200">
+      <nav class="bg-gray-900 border-gray-200">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <router-link to="/" class="text-lg font-bold text-white"> 
             <span> 
@@ -40,21 +40,36 @@
           </button>
 
           <div class="hidden w-full md:block md:w-auto" id="navbar-dropdown">
-            <ul class="flex flex-col top-10 font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-500 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
+            <ul class="flex flex-col top-10 font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-900 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
               <router-link to="/Wishlist" class="text-lg font-bold text-white"> 
-              <li>
-                <span class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">
-                  Wishlist
-                </span>
-            
-              </li>
-            </router-link>
+                <li class="flex items-center">
+                  <span class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 flex items-center relative">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      class="h-6 w-6 ml-2 stroke-white"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                      />
+                    </svg>
+                    <!-- Badge for Wishlist Count -->
+                    <div v-if="wishlistCount > 0" class="absolute top-0 left-6 bg-red-500 text-xs text-white rounded-full w-5 h-5 flex items-center justify-center">
+                      {{ wishlistCount }}
+                    </div>
+                  </span>
+                </li>
+              </router-link>
             <router-link to="/Comparison" class="text-lg font-bold text-white"> 
               <li>
                 <span class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">
                   Comparison
                 </span>
-            
               </li>
             </router-link>
               <li class="hidden lg:block md:block relative">
@@ -65,7 +80,7 @@
                 </div>
                 <router-link
                   to="/cart"
-                  class="file: h-6 w-6 stroke-white cursor-pointer"
+                  class="cursor-pointer"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -73,7 +88,7 @@
                     viewBox="0 0 24 24"
                     strokeWidth="1.5"
                     stroke="currentColor"
-                    class="file: h-6 w-6 stroke-white cursor-pointer"
+                    class="h-6 w-6 stroke-white cursor-pointer"
                   >
                     <path
                       strokeLinecap="round"
@@ -93,7 +108,9 @@
                   to="/login"
                   class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
                 >
-                  Login
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                </svg>
                 </router-link>
               </li>
               <li v-else>
@@ -101,7 +118,15 @@
                   @click="logout"
                   class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
                 >
-                  Logout
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    viewBox="0 0 32 32" 
+                    class="h-6 w-6 stroke-white"
+                  >
+                    <path 
+                      d="M29.71,16.71l-4,4-1.42-1.42L26.59,17H21a3,3,0,0,1-3-3V5a1,1,0,0,0-1-1H5A1,1,0,0,0,4,5V27a1,1,0,0,0,1,1H17a1,1,0,0,0,1-1V20h2v7a3,3,0,0,1-3,3H5a3,3,0,0,1-3-3V5A3,3,0,0,1,5,2H17a3,3,0,0,1,3,3v9a1,1,0,0,0,1,1h5.6l-2.26-2.28,1.42-1.41,3.95,4A1,1,0,0,1,29.71,16.71Z"
+                    />
+                  </svg>
                 </button>
               </li>
             </ul>
@@ -113,12 +138,15 @@
 </template>
 
 <script>
-import { cartStore } from '../router/store';
+import { cartStore, wishlistStore } from '../router/store';
 
 export default {
   computed: {
     cartCount() {
       return cartStore.products.reduce((sum, product) => sum + product.quantity, 0);
+    },
+    wishlistCount() {
+      return wishlistStore.wishlist.length; // Calculate the total number of items in the wishlist
     },
     isAuthenticated() {
       return !!localStorage.getItem('authToken'); 
@@ -132,3 +160,4 @@ export default {
   }
 };
 </script>
+
