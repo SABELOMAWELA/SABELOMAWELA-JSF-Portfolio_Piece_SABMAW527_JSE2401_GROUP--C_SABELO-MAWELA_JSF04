@@ -11,6 +11,9 @@ Welcome to the Vue.js Shopping Cart Application! This project is a modern web ap
 - **User Authentication:** Redirects to login for protected routes.
 - **Checkout:** Proceed to checkout with the cart items.
 
+## Video recording file
+[https://drive.google.com/drive/folders/1qdnfNmYPjBG1kg7KEU9Qkw_8DM41jtF0]
+(https://drive.google.com/drive/folders/1qdnfNmYPjBG1kg7KEU9Qkw_8DM41jtF0)
 ## Deployed Application
 
 The project has been deployed to Vercel. You can access the live application at the following link:
