@@ -7,6 +7,7 @@
             <span> 
               <button class="flex items-center space-x-3 rtl:space-x-reverse">
                 <img src="../assets/online-shop.png" class="h-8" alt="SwiftCart Logo" />
+                
                 <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">
                   SwiftCart
                 </span>
