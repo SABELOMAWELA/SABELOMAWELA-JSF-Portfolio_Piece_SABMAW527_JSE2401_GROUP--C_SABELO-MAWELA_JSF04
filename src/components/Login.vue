@@ -1,6 +1,6 @@
 <template>
   <navbar />
-  <div class="bg-cyan-100 font-sans">
+  <div>
     <div class="max-w-sm mx-auto px-6">
       <div class="relative flex flex-wrap">
         <div class="w-full relative">
